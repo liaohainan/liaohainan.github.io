@@ -82,3 +82,66 @@ tags: JS
 </body>
 </html>
 ```
+
+第二种方法
+
+如果是多个按钮，将每次点击的按钮自带属性比如id，push到一个数组里
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<button id="btn1">获取电影</button>
+<button id="btn2">获取图书</button>
+<button id="btn3">获取音乐</button>
+点击次数<span id="num"></span>
+<div id="show">
+
+</div>
+
+<script>
+    var arr = []
+    var url1= 'http://www.sss.com/movie'
+    var url2= 'http://www.sss.com/book'
+    var url3= 'http://www.sss.com/music'
+    var obj = {
+        btn1: [],
+        btn2: [],
+        btn3: []
+    }
+    $('#btn1').click(function(){
+        btnAjax(url1,'btn1')
+    })
+    $('#btn2').click(function(){
+        btnAjax(url2,'btn2')
+    })
+    $('#btn3').click(function(){
+        btnAjax(url3,'btn3')
+    })
+//封装ajax事件
+    function btnAjax(url,id) {
+        $.ajax({
+            type: 'get',
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                obj[id] = data
+                $('#show').html(obj[arr[arr.length-1]])
+            }
+        })
+    }
+    
+</script>
+</body>
+</html>
+
+
+```
