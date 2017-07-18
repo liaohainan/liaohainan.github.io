@@ -23,7 +23,7 @@ tags: Other
 - HTML CSS support
 
 css自动补齐
-
+<!-- more -->
 - JS-CSS-HTML Formatter
 
 格式化

@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "南九零"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -249,7 +249,7 @@ excerpt_description: true
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
   enable: false
-  length: 150
+  length: 350
 
 # Post meta display settings
 post_meta:

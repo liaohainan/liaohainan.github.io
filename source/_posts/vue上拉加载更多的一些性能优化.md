@@ -30,7 +30,7 @@ res.data.list.forEach(function (e, i) {
     this.list.push({name: e.name})
 })
 ```
-
+<!-- more -->
 push虽然能保证视图更新了，但是每次push之后，理论上vue检测到变化内部set方法执行，然后进行视图更新，这样每次push就会调用一次视图更新
 
 ```js
