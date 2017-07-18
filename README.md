@@ -52,7 +52,7 @@ deploy:
 
      type: git
 
-     repo: https://github.com/leopardpan/leopardpan.github.io.git
+     repo: https://github.com/liaohainan/liaohainan.github.io.git
 
      branch: master
 ```
@@ -68,7 +68,7 @@ npm install hexo-deployer-git --save
 ```
 hexo deploy
 ```
-然后再浏览器中输入http://leopardpan.github.io/就行了，我的github的账户叫leopardpan,把这个改成你github的账户名就行了
+然后再浏览器中输入http://liaohainan.github.io/就行了，我的github的账户叫liaohainan,把这个改成你github的账户名就行了
 
 # 部署步骤
 
