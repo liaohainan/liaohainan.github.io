@@ -1,0 +1,783 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="手机号每4位显示空格开发有时候会遇到输入手机号和银行卡号，按照每4位显示一个空格的需求，方便用户阅读，如果是纯展示，就很容易实现，如果是一边输入一边展示则有点难度 有人用两个input实现，一个负责输入数据，但是透明看不见，另外一个展示在界面上，变相的解决了这个需求（手机上可调用数字键盘） 本次取巧写个demo，只用一个input用定时器不断的查询输入的字符来判断输入的数据（无法直接调用数字键盘，">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手机号每4位显示空格">
+<meta property="og:url" content="http://www.nan90.com/2016/05/05/3手机号每4位显示空格/index.html">
+<meta property="og:site_name" content="南九零">
+<meta property="og:description" content="手机号每4位显示空格开发有时候会遇到输入手机号和银行卡号，按照每4位显示一个空格的需求，方便用户阅读，如果是纯展示，就很容易实现，如果是一边输入一边展示则有点难度 有人用两个input实现，一个负责输入数据，但是透明看不见，另外一个展示在界面上，变相的解决了这个需求（手机上可调用数字键盘） 本次取巧写个demo，只用一个input用定时器不断的查询输入的字符来判断输入的数据（无法直接调用数字键盘，">
+<meta property="og:updated_time" content="2017-07-16T08:58:30.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手机号每4位显示空格">
+<meta name="twitter:description" content="手机号每4位显示空格开发有时候会遇到输入手机号和银行卡号，按照每4位显示一个空格的需求，方便用户阅读，如果是纯展示，就很容易实现，如果是一边输入一边展示则有点难度 有人用两个input实现，一个负责输入数据，但是透明看不见，另外一个展示在界面上，变相的解决了这个需求（手机上可调用数字键盘） 本次取巧写个demo，只用一个input用定时器不断的查询输入的字符来判断输入的数据（无法直接调用数字键盘，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.nan90.com/2016/05/05/3手机号每4位显示空格/"/>
+
+
+
+
+
+  <title>手机号每4位显示空格 | 南九零</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4804a07a4e188e55264cb620b855f11a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">南九零</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.nan90.com/2016/05/05/3手机号每4位显示空格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="糖小面儿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南九零">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">手机号每4位显示空格</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-05T22:14:50+08:00">
+                2016-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="手机号每4位显示空格"><a href="#手机号每4位显示空格" class="headerlink" title="手机号每4位显示空格"></a>手机号每4位显示空格</h1><p>开发有时候会遇到输入手机号和银行卡号，按照每4位显示一个空格的需求，方便用户阅读，如果是纯展示，就很容易实现，如果是一边输入一边展示则有点难度</p>
+<p>有人用两个input实现，一个负责输入数据，但是透明看不见，另外一个展示在界面上，变相的解决了这个需求（手机上可调用数字键盘）</p>
+<p>本次取巧写个demo，只用一个input用定时器不断的查询输入的字符来判断输入的数据（无法直接调用数字键盘，因为里边有空格）</p>
+<p>如果是银行卡号，将字符判断长度更改为，也可以根据实际需求来判断长度<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lastLen === <span class="number">5</span> || lastLen === <span class="number">10</span> || lastLen === <span class="number">15</span>|| lastLen === <span class="number">20</span></div></pre></td></tr></table></figure></p>
+<p>话不多说，上代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"telphone"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"err"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> telphone = <span class="built_in">document</span>.getElementById(<span class="string">'telphone'</span>);</div><div class="line">    <span class="keyword">var</span> err = <span class="built_in">document</span>.getElementById(<span class="string">'err'</span>);</div><div class="line">    <span class="comment">//定义两个缓存值</span></div><div class="line">    <span class="keyword">var</span> firstLen = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> lastLen = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> re=<span class="regexp">/^1(3|4|5|7|8)\d&#123;9&#125;$/</span>;</div><div class="line">    telphone.oninput = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        telphone.value = telphone.value.substr(<span class="number">0</span>, <span class="number">13</span>);<span class="comment">//只允许输入11位+2个空格</span></div><div class="line">        <span class="comment">//用户输入满11位开始验证</span></div><div class="line">        <span class="keyword">if</span>(telphone.value.length==<span class="number">13</span>)&#123;</div><div class="line">            <span class="comment">//将数据去掉空格后验证</span></div><div class="line">            <span class="keyword">if</span>(!re.test(telphone.value.replace(<span class="regexp">/\s/g</span>, <span class="string">''</span>)))&#123;</div><div class="line">                err.innerHTML=<span class="string">'手机号码有误'</span></div><div class="line">            &#125; <span class="keyword">else</span>&#123;</div><div class="line">                err.innerHTML=<span class="string">''</span></div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            err.innerHTML=<span class="string">''</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    telphone.onfocus = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        timer = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            lastLen = telphone.value.length;</div><div class="line">            <span class="keyword">if</span> (lastLen &gt; firstLen) &#123;</div><div class="line">                firstLen = telphone.value.length;</div><div class="line">                <span class="keyword">if</span> (lastLen === <span class="number">4</span> || lastLen === <span class="number">9</span>) &#123;</div><div class="line">                    <span class="keyword">var</span> temp1 = telphone.value.substr(<span class="number">0</span>, telphone.value.length - <span class="number">1</span>);</div><div class="line">                    <span class="keyword">var</span> temp2 = telphone.value.substr(telphone.value.length - <span class="number">1</span>);</div><div class="line">                    telphone.value = temp1 + <span class="string">' '</span> + temp2;</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (lastLen &lt;= firstLen) &#123;</div><div class="line">                <span class="keyword">if</span> (lastLen === <span class="number">4</span> || lastLen === <span class="number">9</span>) &#123;</div><div class="line">                    telphone.value = telphone.value.substr(<span class="number">0</span>, telphone.value.length - <span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">                firstLen = telphone.value.length;</div><div class="line">            &#125;</div><div class="line">        &#125;, <span class="number">10</span>);<span class="comment">//如果手机出现卡顿，可适当把定时器时间加大</span></div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat.png" alt="糖小面儿 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay.png" alt="糖小面儿 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/02/2hexo使用方法/" rel="next" title="hexo使用方法">
+                <i class="fa fa-chevron-left"></i> hexo使用方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/06/4处理json数据的空数据为任意字符/" rel="prev" title="处理json数据的空数据为任意字符">
+                处理json数据的空数据为任意字符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="糖小面儿" />
+          <p class="site-author-name" itemprop="name">糖小面儿</p>
+           
+              <p class="site-description motion-element" itemprop="description">一个人的自嗨</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liaohainan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://es6.ruanyifeng.com" title="ES6" target="_blank">ES6</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://cn.vuejs.org" title="Vue" target="_blank">Vue</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://element.eleme.io/#/zh-CN" title="Element-UI" target="_blank">Element-UI</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://maxiang.io/" title="马克飞象" target="_blank">马克飞象</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://discountry.github.io/react/docs/hello-world.html" title="React中文" target="_blank">React中文</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ydcss.com/" title="一点-博客" target="_blank">一点-博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/jobbole/awesome-javascript-cn" title="awesome-js-cn" target="_blank">awesome-js-cn</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/opendigg/awesome-github-vue" title="awesome-vue" target="_blank">awesome-vue</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#手机号每4位显示空格"><span class="nav-number">1.</span> <span class="nav-text">手机号每4位显示空格</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">糖小面儿</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>-->
+<div>京ICP备16031694号-2</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
